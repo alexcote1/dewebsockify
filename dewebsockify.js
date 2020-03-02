@@ -5,13 +5,14 @@ var WebSocket = require('ws');
 var net = require('net');
 
 if(process.argv.length < 4) {
-	console.log("Usage: dewebsockify ws://someserver/path <port>");
+	console.log("Usage: dewebsockify ws://someserver/path <port> https://myorigin.com");
   process.exit(1);
 }
 var port = process.argv[3];
 
 var server = net.createServer(function(socket) {
   var ws = new WebSocket(process.argv[2], {
+    origin: process.argv[4]
     rejectUnauthorized: false
   });
 
