@@ -5,14 +5,14 @@ var WebSocket = require('ws');
 var net = require('net');
 
 if(process.argv.length < 4) {
-	console.log("Usage: dewebsockify ws://someserver/path <port> https://myorigin.com");
+        console.log("Usage: dewebsockify ws://someserver/path <port> https://myorigin.com");
   process.exit(1);
 }
 var port = process.argv[3];
 
 var server = net.createServer(function(socket) {
   var ws = new WebSocket(process.argv[2], {
-    origin: process.argv[4]
+    origin: process.argv[4],
     rejectUnauthorized: false
   });
 
@@ -23,7 +23,7 @@ var server = net.createServer(function(socket) {
 
   ws.on('error', function(err) {
     console.log("Connection from", socket.address().address ,"to end-point...", err.toString());
-    socket.destroy);
+    socket.destroy();
   });
 
   ws.on('open', function() {
@@ -50,3 +50,5 @@ var server = net.createServer(function(socket) {
   });
 
 }).listen(port);
+
+
